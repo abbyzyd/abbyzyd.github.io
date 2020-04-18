@@ -170,7 +170,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-04-18 16:25:46 / Modified: 16:27:02" itemprop="dateCreated datePublished" datetime="2020-04-18T16:25:46+08:00">2020-04-18</time>
+              <time title="Created: 2020-04-18 16:25:46 / Modified: 17:13:49" itemprop="dateCreated datePublished" datetime="2020-04-18T16:25:46+08:00">2020-04-18</time>
             </span>
 
           
@@ -184,7 +184,35 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="部署Hexo-GitPage"><a href="#部署Hexo-GitPage" class="headerlink" title="部署Hexo+GitPage"></a>部署Hexo+GitPage</h1><h2 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h2><h2 id="安装-node"><a href="#安装-node" class="headerlink" title="安装 node"></a>安装 node</h2>
+          <h1 id="部署Hexo-GitPage"><a href="#部署Hexo-GitPage" class="headerlink" title="部署Hexo+GitPage"></a>部署Hexo+GitPage</h1><h1 id="Hexo安装"><a href="#Hexo安装" class="headerlink" title="Hexo安装"></a>Hexo安装</h1><h2 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h2><p>检查版本</p>
+<p>git –version`</p>
+<h2 id="安装-node"><a href="#安装-node" class="headerlink" title="安装 node"></a>安装 node</h2><p>检查版本</p>
+<p>node -v`</p>
+<h2 id="安装-hexo"><a href="#安装-hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h2><p>在本地建立一个文件夹（博客的目录），例如：E:\git\blog，进入这个文件夹，鼠标右键选择Git Bash Here</p>
+<p><code>npm i -g hexo</code></p>
+<p><code>hexo init</code></p>
+<p><code>npm install</code></p>
+<h1 id="Git建立博客仓库"><a href="#Git建立博客仓库" class="headerlink" title="Git建立博客仓库"></a>Git建立博客仓库</h1><p>仓库名必须为：用户名+github.io</p>
+<h1 id="Git设置SSH"><a href="#Git设置SSH" class="headerlink" title="Git设置SSH"></a>Git设置SSH</h1><h2 id="查看配置的邮箱"><a href="#查看配置的邮箱" class="headerlink" title="查看配置的邮箱"></a>查看配置的邮箱</h2><p><code>git config --list</code></p>
+<h2 id="生成SSH公私钥"><a href="#生成SSH公私钥" class="headerlink" title="生成SSH公私钥"></a>生成SSH公私钥</h2><p><code>ssh-keygen -t rsa -C &quot;邮箱地址&quot;</code></p>
+<p>会在C:\Users\${用户名}\.ssh下生成id_rsa和id_rsa.pub两个文件</p>
+<h2 id="配置公钥"><a href="#配置公钥" class="headerlink" title="配置公钥"></a>配置公钥</h2><p>登录github的个人账户，设置ssh公钥</p>
+<h2 id="测试是否授权生效"><a href="#测试是否授权生效" class="headerlink" title="测试是否授权生效"></a>测试是否授权生效</h2><p><code>ssh git@github.com</code></p>
+<p>出现You’ve successfully authenticated即成功</p>
+<h1 id="hexo-常用命令"><a href="#hexo-常用命令" class="headerlink" title="hexo 常用命令"></a>hexo 常用命令</h1><h2 id="下载主题"><a href="#下载主题" class="headerlink" title="下载主题"></a>下载主题</h2><p> <code>git clone https://github.com/theme-next/hexo-theme-next themes/next</code></p>
+<p>修改_config.yml对应的主题 theme: next</p>
+<h2 id="新建Post"><a href="#新建Post" class="headerlink" title="新建Post"></a>新建Post</h2><p>hexo n “my fisrt blog”</p>
+<p>在source\_posts文件夹下会出现my fisrt blog.md，在里面编写内容即可</p>
+<h1 id="删除Post"><a href="#删除Post" class="headerlink" title="删除Post"></a>删除Post</h1><p>先删掉db.json这个文件，把对应的md文件也删掉，重新执行</p>
+<p><code>hexo clean</code></p>
+<p><code>hexo g</code></p>
+<p><code>hexo d</code></p>
+<h2 id="清除数据"><a href="#清除数据" class="headerlink" title="清除数据"></a>清除数据</h2><p><code>hexo clean</code></p>
+<h2 id="生成静态页面"><a href="#生成静态页面" class="headerlink" title="生成静态页面"></a>生成静态页面</h2><p><code>hexo g</code></p>
+<h2 id="部署博客"><a href="#部署博客" class="headerlink" title="部署博客"></a>部署博客</h2><p>在_config.yml的deploy下面配置</p>
+<p>deploy:<br>  type: git<br>  repo: <a href="mailto:git@github.com">git@github.com</a>:用户名/用户名.github.io.git<br>  branch: master</p>
+<p>然后执行<code>hexo d</code></p>
+
       
     </div>
 
