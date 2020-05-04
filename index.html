@@ -168,10 +168,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-05-03 21:17:20 / Modified: 22:07:06" itemprop="dateCreated datePublished" datetime="2020-05-03T21:17:20+08:00">2020-05-03</time>
+              <time title="Created: 2020-05-03 21:17:20" itemprop="dateCreated datePublished" datetime="2020-05-03T21:17:20+08:00">2020-05-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-04 08:49:33" itemprop="dateModified" datetime="2020-05-04T08:49:33+08:00">2020-05-04</time>
+              </span>
 
           
 
@@ -190,13 +196,44 @@
 <p><code>uname -a</code></p>
 <img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/image-20200503212655901.png" class="" title="安装环境">
 
-<h1 id="安装包准备"><a href="#安装包准备" class="headerlink" title="安装包准备"></a>安装包准备</h1><a href="https://download.oracle.com/otn/java/jdk/7u80-b15/jdk-7u80-linux-x64.tar.gz?AuthParam=1588416879_92b2bfa55940dfde339b6a4ac496d89f" title="[external] [jdk-7u80-linux-x64.tar.gz]" target="">jdk-7u80-linux-x64.tar.gz</a>
+<h1 id="安装包准备"><a href="#安装包准备" class="headerlink" title="安装包准备"></a>安装包准备</h1><table>
+<thead>
+<tr>
+<th>安装包/驱动</th>
+<th>下载地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>jdk-7u80-linux-x64.tar.gz</td>
+<td><a href="https://download.oracle.com/otn/java/jdk/7u80-b15/jdk-7u80-linux-x64.tar.gz" title="[external] [jdk-7u80-linux-x64.tar.gz]" target="">下载</a></td>
+</tr>
+<tr>
+<td>mysql-5.7.25-1.el6.x86_64.rpm-bundle.tar</td>
+<td>建议直接用老师提供的那个</td>
+</tr>
+<tr>
+<td>hadoop-2.7.7.tar.gz</td>
+<td><a href="http://mirror.metrocast.net/apache/hadoop/common/hadoop-2.7.7/hadoop-2.7.7.tar.gz" title="[external] [hadoop-2.7.7.tar.gz]" target="">下载</a></td>
+</tr>
+<tr>
+<td>apache-hive-1.2.2-bin.tar.gz</td>
+<td><a href="https://mirrors.tuna.tsinghua.edu.cn/apache/hive/hive-1.2.2/apache-hive-1.2.2-bin.tar.gz" title="[external] [apache-hive-1.2.2-bin.tar.gz]" target="">下载</a></td>
+</tr>
+<tr>
+<td>mysql-connector-java-5.1.6.jar</td>
+<td><a href="https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar" title="[external] [mysql-connector-java-5.1.6.jar]" target="">下载</a></td>
+</tr>
+</tbody></table>
+<p>关于mysql的下载，可以考虑使用wget</p>
+<p><code>wget https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.23-1.el6.i686.rpm-bundle.tar</code></p>
+<h1 id="目录安排"><a href="#目录安排" class="headerlink" title="目录安排"></a>目录安排</h1><p>安装包存放目录：<strong><em>/home/app/software</em></strong></p>
+<img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/image-20200504074606381.png" class="" title="安装包存放目录">
 
-<p>mysql-5.7.25-1.el6.x86_64.rpm-bundle.tar</p>
-<p>hadoop-2.7.7.tar.gz</p>
-<p>apache-hive-1.2.2-bin.tar.gz</p>
-<p>mysql-connector-java-5.1.6.jar</p>
+<p>安装目录：<strong>* /opt *</strong></p>
+<img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/image-20200504084906576.png" class="" title="安装目录">
 
+<p><img src="E:%5Cgit%5Cblog%5Csource_posts%5CLinux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%5Cimage-20200504084906576.png" alt="image-20200504084906576"></p>
+<h1 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h1><h1 id="安装Hadoop"><a href="#安装Hadoop" class="headerlink" title="安装Hadoop"></a>安装Hadoop</h1><h1 id="安装Mysql"><a href="#安装Mysql" class="headerlink" title="安装Mysql"></a>安装Mysql</h1><h1 id="安装Hive"><a href="#安装Hive" class="headerlink" title="安装Hive"></a>安装Hive</h1>
       
     </div>
 
@@ -246,7 +283,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-03 21:47:34" itemprop="dateModified" datetime="2020-05-03T21:47:34+08:00">2020-05-03</time>
+                <time title="Modified: 2020-05-04 07:43:22" itemprop="dateModified" datetime="2020-05-04T07:43:22+08:00">2020-05-04</time>
               </span>
 
           
@@ -278,7 +315,8 @@
 <p>出现You’ve successfully authenticated即成功</p>
 <h1 id="hexo-常用命令"><a href="#hexo-常用命令" class="headerlink" title="hexo 常用命令"></a>hexo 常用命令</h1><h2 id="下载主题"><a href="#下载主题" class="headerlink" title="下载主题"></a>下载主题</h2><p> <code>git clone https://github.com/theme-next/hexo-theme-next themes/next</code></p>
 <p>修改_config.yml对应的主题 theme: next</p>
-<h2 id="新建Post"><a href="#新建Post" class="headerlink" title="新建Post"></a>新建Post</h2><p>hexo n “my fisrt blog”</p>
+<h2 id="新建Post"><a href="#新建Post" class="headerlink" title="新建Post"></a>新建Post</h2><p>在blog目录下右键Git Bash here</p>
+<p>hexo n “my fisrt blog”</p>
 <p>在source\_posts文件夹下会出现my fisrt blog.md，在里面编写内容即可</p>
 <h1 id="删除Post"><a href="#删除Post" class="headerlink" title="删除Post"></a>删除Post</h1><p>先删掉db.json这个文件，把对应的md文件也删掉，重新执行</p>
 <p><code>hexo clean</code></p>
