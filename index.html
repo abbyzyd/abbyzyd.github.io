@@ -176,7 +176,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-04 22:32:04" itemprop="dateModified" datetime="2020-05-04T22:32:04+08:00">2020-05-04</time>
+                <time title="Modified: 2020-05-04 23:39:07" itemprop="dateModified" datetime="2020-05-04T23:39:07+08:00">2020-05-04</time>
               </span>
 
           
@@ -241,7 +241,7 @@
 <p>按ESC键，输入<code>:wq!</code>保存hosts</p>
 <p>重启后Host</p>
 <p><code>/etc/init.d/network restart</code></p>
-<h1 id="部署JDK"><a href="#部署JDK" class="headerlink" title="部署JDK"></a>部署JDK</h1><h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><p><code>cd /home/app/software</code></p>
+<h1 id="部署JDK"><a href="#部署JDK" class="headerlink" title="部署JDK"></a>部署JDK</h1><h2 id="解压安装包"><a href="#解压安装包" class="headerlink" title="解压安装包"></a>解压安装包</h2><p><code>cd /home/app/software</code></p>
 <p><code>tar -zxf jdk-7u80-linux-x64.tar.gz -C /opt</code></p>
 <h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p><code>vi /etc/profile</code></p>
 <p>加入JAVA_HOME、JRE_HOME配置</p>
@@ -253,19 +253,13 @@
 <p>出现下图即配置成功</p>
 <img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/java-version.png" class="" title="jdk环境变量配置成功">
 
-<h1 id="部署Hadoop"><a href="#部署Hadoop" class="headerlink" title="部署Hadoop"></a>部署Hadoop</h1><h2 id="解压-1"><a href="#解压-1" class="headerlink" title="解压"></a>解压</h2><p><code>cd /home/app/software</code></p>
+<h1 id="部署Hadoop"><a href="#部署Hadoop" class="headerlink" title="部署Hadoop"></a>部署Hadoop</h1><h2 id="解压安装包-1"><a href="#解压安装包-1" class="headerlink" title="解压安装包"></a>解压安装包</h2><p><code>cd /home/app/software</code></p>
 <p><code>tar -zxf hadoop-2.7.7.tar.gz -C /opt</code></p>
 <h2 id="文件路径准备"><a href="#文件路径准备" class="headerlink" title="文件路径准备"></a>文件路径准备</h2><p>hadoop运⾏行行时产⽣生⽂文件的存储⽬目录</p>
 <p><code>mkdir -p /opt/hadoop-2.7.7/data/tmp</code> </p>
 <p><code>mkdir -p /opt/hadoop-2.7.7/data/var</code> </p>
 <p><code>mkdir -p /opt/hadoop-2.7.7/data/dfs/nn</code> </p>
 <p><code>mkdir -p /opt/hadoop-2.7.7/data/dfs/data</code></p>
-<h2 id="配置环境变量-1"><a href="#配置环境变量-1" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p><code>vi /etc/profile</code></p>
-<p>加入HADOOP_HOME配置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> hadoop environment</span></span><br><span class="line">export HADOOP_HOME=/opt/hadoop-2.7.7</span><br><span class="line">export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin</span><br></pre></td></tr></table></figure>
-
-<p>按ESC键，输入<code>:wq!</code>保存profile</p>
-<p><code>source /etc/profile</code></p>
 <h2 id="配置Hadoop环境"><a href="#配置Hadoop环境" class="headerlink" title="配置Hadoop环境"></a>配置Hadoop环境</h2><h3 id="修改core-site-xml"><a href="#修改core-site-xml" class="headerlink" title="修改core-site.xml"></a>修改core-site.xml</h3><p> <code>vi /opt/hadoop-2.7.7/etc/hadoop/core-site.xml</code></p>
 <p>修改内容如下：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 指定HDFS中NameNode的地址 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.defaultFS<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://master:9000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 指定hadoop运⾏行行时产⽣生⽂文件的存储⽬目录 /opt/hadoop-2.7.7/data/tmp/ ⽬目</span></span><br><span class="line"><span class="comment">录 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>file:///opt/hadoop-2.7.7/data/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -302,6 +296,12 @@
 <p>按ESC键，输入<code>:wq!</code>保存文件</p>
 <h3 id="修改yarn-site-xml"><a href="#修改yarn-site-xml" class="headerlink" title="修改yarn-site.xml"></a>修改yarn-site.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- reducer获取数据的⽅方式 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 指定YARN的ResourceManager的地址 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.hostname<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>master<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="配置环境变量-1"><a href="#配置环境变量-1" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p><code>vi /etc/profile</code></p>
+<p>加入HADOOP_HOME配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> hadoop environment</span></span><br><span class="line">export HADOOP_HOME=/opt/hadoop-2.7.7</span><br><span class="line">export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin</span><br></pre></td></tr></table></figure>
+
+<p>按ESC键，输入<code>:wq!</code>保存profile</p>
+<p><code>source /etc/profile</code></p>
 <h2 id="启动Hadoop单节点集群"><a href="#启动Hadoop单节点集群" class="headerlink" title="启动Hadoop单节点集群"></a>启动Hadoop单节点集群</h2><h3 id="初次启动时需要初始化namenode"><a href="#初次启动时需要初始化namenode" class="headerlink" title="初次启动时需要初始化namenode"></a>初次启动时需要初始化namenode</h3><p><code>hadoop namenode -format</code></p>
 <h3 id="启动hdfs，启动时可能需要输入root密码。"><a href="#启动hdfs，启动时可能需要输入root密码。" class="headerlink" title="启动hdfs，启动时可能需要输入root密码。"></a>启动hdfs，启动时可能需要输入root密码。</h3><p><code>start-dfs.sh</code></p>
 <h3 id="启动yarn，启动时可能需要输入root密码"><a href="#启动yarn，启动时可能需要输入root密码" class="headerlink" title="启动yarn，启动时可能需要输入root密码"></a>启动yarn，启动时可能需要输入root密码</h3><p><code>start-yarn.sh</code></p>
@@ -318,7 +318,52 @@
 
 
 
-<h1 id="安装Mysql"><a href="#安装Mysql" class="headerlink" title="安装Mysql"></a>安装Mysql</h1><h1 id="安装Hive"><a href="#安装Hive" class="headerlink" title="安装Hive"></a>安装Hive</h1>
+<h1 id="安装Mysql"><a href="#安装Mysql" class="headerlink" title="安装Mysql"></a>安装Mysql</h1><h2 id="解压安装包-2"><a href="#解压安装包-2" class="headerlink" title="解压安装包"></a>解压安装包</h2><p><code>cd /home/app/software</code></p>
+<p><code>mkdir -p /opt/mysql</code></p>
+<p><code>tar -zxf mysql-5.7.23-1.el6.i686.rpm-bundle.tar -C /opt/mysql</code></p>
+<h2 id="安装各项依赖"><a href="#安装各项依赖" class="headerlink" title="安装各项依赖"></a>安装各项依赖</h2><p><code>cd /opt/mysql/</code></p>
+<p><code>rpm -ivh mysql-community-common-5.7.25-1.el6.x86_64.rpm</code></p>
+<p><code>rpm -ivh mysql-community-libs-5.7.25-1.el6.x86_64.rpm</code> </p>
+<p><code>rpm -ivh mysql-community-client-5.7.25-1.el6.x86_64.rpm</code></p>
+<p><code>rpm -ivh mysql-community-server-5.7.25-1.el6.x86_64.rpm --nodeps</code></p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p><code>service mysqld start</code></p>
+<h2 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h2><h3 id="重置初始密码"><a href="#重置初始密码" class="headerlink" title="重置初始密码"></a>重置初始密码</h3><p><code>cat /var/log/mysqld.log | grep root@localhost</code></p>
+<img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/mysql-password.png" class="" title="mysql初始密码">
+
+<p>进入mysql命令行</p>
+<p><code>mysql -u root -p</code></p>
+<p>修改初始密码</p>
+<p><strong>注意：mysql命令行状态，输入命令以;结束，mysql对密码复杂度有校验标准（这个可以修改的），建议新密码包含英文大小写，数字，特殊字符</strong></p>
+<p><code>set password=password(&#39;Root@123&#39;);</code></p>
+<img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/mysql-setPassword.png" class="" title="mysql重置密码">
+
+<h3 id="进入mysql命令行状态"><a href="#进入mysql命令行状态" class="headerlink" title="进入mysql命令行状态"></a>进入mysql命令行状态</h3><p><code>mysql -u root -p</code></p>
+<p>输入密码，回车</p>
+<h3 id="查看mysql服务器状态"><a href="#查看mysql服务器状态" class="headerlink" title="查看mysql服务器状态"></a>查看mysql服务器状态</h3><p><code>status;</code></p>
+<img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/mysql-status.png" class="" title="mysql服务器状态">
+
+<h3 id="授权远程连接"><a href="#授权远程连接" class="headerlink" title="授权远程连接"></a>授权远程连接</h3><p><strong>注意：防火墙启用3306</strong></p>
+<p><code>grant all privileges on *.* to &#39;root&#39;@&#39;%&#39; identified by &#39;Root@123&#39;;</code></p>
+<h3 id="退出命令行状态"><a href="#退出命令行状态" class="headerlink" title="退出命令行状态"></a>退出命令行状态</h3><p><code>exit;</code></p>
+<h2 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h2><p><code>/etc/init.d/mysqld stop</code></p>
+<h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><p><code>service mysqld restart</code></p>
+<h2 id="查看mysql配置文件"><a href="#查看mysql配置文件" class="headerlink" title="查看mysql配置文件"></a>查看mysql配置文件</h2><p><code>cat /etc/my.cnf</code></p>
+<img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/mysql-cnf.png" class="" title="mysql配置">
+
+<h2 id="启动常见报错"><a href="#启动常见报错" class="headerlink" title="启动常见报错"></a>启动常见报错</h2><p>参见资料：<a href="https://www.cnblogs.com/youjianjiangnan/p/10259151.html" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;youjianjiangnan&#x2F;p&#x2F;10259151.html [external] [mysql启动报错参考资料]" target=""></a></p>
+<h3 id="Can’t-start-server-can’t-check-PID-filepath-No-such-file-or-directory"><a href="#Can’t-start-server-can’t-check-PID-filepath-No-such-file-or-directory" class="headerlink" title="Can’t start server: can’t check PID filepath: No such file or directory"></a>Can’t start server: can’t check PID filepath: No such file or directory</h3><ol>
+<li><p>确认pid所在目录</p>
+<p>通过查看</p>
+</li>
+<li><p>建立目录并授权</p>
+<p><code>mkdir -p /var/run/mysqld/</code></p>
+<p><code>chmod -R 777 /var/run/mysqld/</code></p>
+</li>
+<li><p>启动mysql</p>
+<p><code>service mysqld start</code></p>
+</li>
+</ol>
+<h1 id="安装Hive"><a href="#安装Hive" class="headerlink" title="安装Hive"></a>安装Hive</h1>
       
     </div>
 
