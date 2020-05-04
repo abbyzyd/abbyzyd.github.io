@@ -176,7 +176,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-04 22:09:26" itemprop="dateModified" datetime="2020-05-04T22:09:26+08:00">2020-05-04</time>
+                <time title="Modified: 2020-05-04 22:32:04" itemprop="dateModified" datetime="2020-05-04T22:32:04+08:00">2020-05-04</time>
               </span>
 
           
@@ -305,9 +305,18 @@
 <h2 id="启动Hadoop单节点集群"><a href="#启动Hadoop单节点集群" class="headerlink" title="启动Hadoop单节点集群"></a>启动Hadoop单节点集群</h2><h3 id="初次启动时需要初始化namenode"><a href="#初次启动时需要初始化namenode" class="headerlink" title="初次启动时需要初始化namenode"></a>初次启动时需要初始化namenode</h3><p><code>hadoop namenode -format</code></p>
 <h3 id="启动hdfs，启动时可能需要输入root密码。"><a href="#启动hdfs，启动时可能需要输入root密码。" class="headerlink" title="启动hdfs，启动时可能需要输入root密码。"></a>启动hdfs，启动时可能需要输入root密码。</h3><p><code>start-dfs.sh</code></p>
 <h3 id="启动yarn，启动时可能需要输入root密码"><a href="#启动yarn，启动时可能需要输入root密码" class="headerlink" title="启动yarn，启动时可能需要输入root密码"></a>启动yarn，启动时可能需要输入root密码</h3><p><code>start-yarn.sh</code></p>
-<h2 id="查看hadoop启动情况"><a href="#查看hadoop启动情况" class="headerlink" title="查看hadoop启动情况"></a>查看hadoop启动情况</h2><p><code>jps</code></p>
+<h2 id="测试Hadoop"><a href="#测试Hadoop" class="headerlink" title="测试Hadoop"></a>测试Hadoop</h2><h3 id="检查启动情况"><a href="#检查启动情况" class="headerlink" title="检查启动情况"></a>检查启动情况</h3><p><code>jps</code></p>
 <p>启动正常，如下图：</p>
 <img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/jps.png" class="" title="hadoop启动情况">
+
+<h3 id="浏览器访问"><a href="#浏览器访问" class="headerlink" title="浏览器访问"></a>浏览器访问</h3><p>访问 <a href="http://masterIp:50070/dfshealth.html#tab-datanode，正常如下图，" target="_blank" rel="noopener">http://masterIp:50070/dfshealth.html#tab-datanode，正常如下图，</a></p>
+<img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/hadoop-web.png" class="" title="hadoop web页面访问">
+
+<h3 id="上传文件到hadoop"><a href="#上传文件到hadoop" class="headerlink" title="上传文件到hadoop"></a>上传文件到hadoop</h3><p>上传文件：<code>hadoop fs -put /root/score.txt /score.txt</code></p>
+<p>查看文件：<code>hadoop fs -cat /score.txt</code></p>
+<img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/hadoop-upload.png" class="" title="hadoop文件上传">
+
+
 
 <h1 id="安装Mysql"><a href="#安装Mysql" class="headerlink" title="安装Mysql"></a>安装Mysql</h1><h1 id="安装Hive"><a href="#安装Hive" class="headerlink" title="安装Hive"></a>安装Hive</h1>
       
