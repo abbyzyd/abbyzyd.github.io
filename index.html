@@ -176,7 +176,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-04 23:39:07" itemprop="dateModified" datetime="2020-05-04T23:39:07+08:00">2020-05-04</time>
+                <time title="Modified: 2020-05-04 23:41:34" itemprop="dateModified" datetime="2020-05-04T23:41:34+08:00">2020-05-04</time>
               </span>
 
           
@@ -318,7 +318,7 @@
 
 
 
-<h1 id="安装Mysql"><a href="#安装Mysql" class="headerlink" title="安装Mysql"></a>安装Mysql</h1><h2 id="解压安装包-2"><a href="#解压安装包-2" class="headerlink" title="解压安装包"></a>解压安装包</h2><p><code>cd /home/app/software</code></p>
+<h1 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h1><h2 id="解压安装包-2"><a href="#解压安装包-2" class="headerlink" title="解压安装包"></a>解压安装包</h2><p><code>cd /home/app/software</code></p>
 <p><code>mkdir -p /opt/mysql</code></p>
 <p><code>tar -zxf mysql-5.7.23-1.el6.i686.rpm-bundle.tar -C /opt/mysql</code></p>
 <h2 id="安装各项依赖"><a href="#安装各项依赖" class="headerlink" title="安装各项依赖"></a>安装各项依赖</h2><p><code>cd /opt/mysql/</code></p>
@@ -347,13 +347,13 @@
 <h3 id="退出命令行状态"><a href="#退出命令行状态" class="headerlink" title="退出命令行状态"></a>退出命令行状态</h3><p><code>exit;</code></p>
 <h2 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h2><p><code>/etc/init.d/mysqld stop</code></p>
 <h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><p><code>service mysqld restart</code></p>
-<h2 id="查看mysql配置文件"><a href="#查看mysql配置文件" class="headerlink" title="查看mysql配置文件"></a>查看mysql配置文件</h2><p><code>cat /etc/my.cnf</code></p>
+<h2 id="查看MySQL配置文件"><a href="#查看MySQL配置文件" class="headerlink" title="查看MySQL配置文件"></a>查看MySQL配置文件</h2><p><code>cat /etc/my.cnf</code></p>
 <img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/mysql-cnf.png" class="" title="mysql配置">
 
 <h2 id="启动常见报错"><a href="#启动常见报错" class="headerlink" title="启动常见报错"></a>启动常见报错</h2><p>参见资料：<a href="https://www.cnblogs.com/youjianjiangnan/p/10259151.html" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;youjianjiangnan&#x2F;p&#x2F;10259151.html [external] [mysql启动报错参考资料]" target=""></a></p>
 <h3 id="Can’t-start-server-can’t-check-PID-filepath-No-such-file-or-directory"><a href="#Can’t-start-server-can’t-check-PID-filepath-No-such-file-or-directory" class="headerlink" title="Can’t start server: can’t check PID filepath: No such file or directory"></a>Can’t start server: can’t check PID filepath: No such file or directory</h3><ol>
 <li><p>确认pid所在目录</p>
-<p>通过查看</p>
+<p>参见8.7</p>
 </li>
 <li><p>建立目录并授权</p>
 <p><code>mkdir -p /var/run/mysqld/</code></p>
