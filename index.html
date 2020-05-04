@@ -176,7 +176,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-04 08:51:54" itemprop="dateModified" datetime="2020-05-04T08:51:54+08:00">2020-05-04</time>
+                <time title="Modified: 2020-05-04 09:08:46" itemprop="dateModified" datetime="2020-05-04T09:08:46+08:00">2020-05-04</time>
               </span>
 
           
@@ -229,10 +229,18 @@
 <h1 id="目录安排"><a href="#目录安排" class="headerlink" title="目录安排"></a>目录安排</h1><p>安装包存放目录：<strong><em>/home/app/software</em></strong></p>
 <img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/image-20200504074606381.png" class="" title="安装包存放目录">
 
-<p>安装目录：<strong>* /opt *</strong></p>
+<p>安装目录：<strong><em>/opt</em></strong></p>
 <img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/image-20200504084906576.png" class="" title="安装目录">
 
-<h1 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h1><h1 id="安装Hadoop"><a href="#安装Hadoop" class="headerlink" title="安装Hadoop"></a>安装Hadoop</h1><h1 id="安装Mysql"><a href="#安装Mysql" class="headerlink" title="安装Mysql"></a>安装Mysql</h1><h1 id="安装Hive"><a href="#安装Hive" class="headerlink" title="安装Hive"></a>安装Hive</h1>
+<h1 id="部署JDK"><a href="#部署JDK" class="headerlink" title="部署JDK"></a>部署JDK</h1><h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><p><code>cd /home/app/software</code></p>
+<p><code>tar -zxf jdk-7u80-linux-x64.tar.gz -C /opt</code></p>
+<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p><code>vi /etc/profile</code></p>
+<p>加入JAVA_HOME、JRE_HOME配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME&#x3D;&#x2F;opt&#x2F;jdk1.7.0_80</span><br><span class="line">JRE_HOME&#x3D;&#x2F;opt&#x2F;jdk1.7.0_80&#x2F;jre</span><br><span class="line">CLASS_PATH&#x3D;.:$JAVA_HOME&#x2F;lib&#x2F;dt.jar:$JAVA_HOME&#x2F;lib&#x2F;tools.jar:$JRE_HOME&#x2F;lib</span><br><span class="line">PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin:$JRE_HOME&#x2F;bin</span><br><span class="line">export JAVA_HOME JRE_HOME CLASS_PATH PATH</span><br></pre></td></tr></table></figure>
+
+<p>按ESC键，输入<code>:wq!</code>保存profile</p>
+<p><code>source /etc/profile</code></p>
+<h1 id="部署Hadoop"><a href="#部署Hadoop" class="headerlink" title="部署Hadoop"></a>部署Hadoop</h1><h1 id="安装Mysql"><a href="#安装Mysql" class="headerlink" title="安装Mysql"></a>安装Mysql</h1><h1 id="安装Hive"><a href="#安装Hive" class="headerlink" title="安装Hive"></a>安装Hive</h1>
       
     </div>
 
