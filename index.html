@@ -176,7 +176,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-04 23:44:25" itemprop="dateModified" datetime="2020-05-04T23:44:25+08:00">2020-05-04</time>
+                <time title="Modified: 2020-05-05 08:03:16" itemprop="dateModified" datetime="2020-05-05T08:03:16+08:00">2020-05-05</time>
               </span>
 
           
@@ -249,7 +249,8 @@
 
 <p>按ESC键，输入<code>:wq!</code>保存profile</p>
 <p><code>source /etc/profile</code></p>
-<h2 id="检查jdk环境变量"><a href="#检查jdk环境变量" class="headerlink" title="检查jdk环境变量"></a>检查jdk环境变量</h2><p><code>java -version</code></p>
+<h2 id="检查jdk环境变量"><a href="#检查jdk环境变量" class="headerlink" title="检查jdk环境变量"></a>检查jdk环境变量</h2><p>授权：<code>chmod -R 777 /opt/jdk1.7.0_80</code></p>
+<p><code>java -version</code></p>
 <p>出现下图即配置成功</p>
 <img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/java-version.png" class="" title="jdk环境变量配置成功">
 
@@ -302,7 +303,8 @@
 
 <p>按ESC键，输入<code>:wq!</code>保存profile</p>
 <p><code>source /etc/profile</code></p>
-<h2 id="启动Hadoop单节点集群"><a href="#启动Hadoop单节点集群" class="headerlink" title="启动Hadoop单节点集群"></a>启动Hadoop单节点集群</h2><h3 id="初次启动时需要初始化namenode"><a href="#初次启动时需要初始化namenode" class="headerlink" title="初次启动时需要初始化namenode"></a>初次启动时需要初始化namenode</h3><p><code>hadoop namenode -format</code></p>
+<h2 id="启动Hadoop单节点集群"><a href="#启动Hadoop单节点集群" class="headerlink" title="启动Hadoop单节点集群"></a>启动Hadoop单节点集群</h2><h3 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h3><p><code>chmod -R 777 /opt/hadoop-2.7.7</code></p>
+<h3 id="初次启动时需要初始化namenode"><a href="#初次启动时需要初始化namenode" class="headerlink" title="初次启动时需要初始化namenode"></a>初次启动时需要初始化namenode</h3><p><code>hadoop namenode -format</code></p>
 <h3 id="启动hdfs，启动时可能需要输入root密码。"><a href="#启动hdfs，启动时可能需要输入root密码。" class="headerlink" title="启动hdfs，启动时可能需要输入root密码。"></a>启动hdfs，启动时可能需要输入root密码。</h3><p><code>start-dfs.sh</code></p>
 <h3 id="启动yarn，启动时可能需要输入root密码"><a href="#启动yarn，启动时可能需要输入root密码" class="headerlink" title="启动yarn，启动时可能需要输入root密码"></a>启动yarn，启动时可能需要输入root密码</h3><p><code>start-yarn.sh</code></p>
 <h2 id="测试Hadoop"><a href="#测试Hadoop" class="headerlink" title="测试Hadoop"></a>测试Hadoop</h2><h3 id="检查启动情况"><a href="#检查启动情况" class="headerlink" title="检查启动情况"></a>检查启动情况</h3><p><code>jps</code></p>
@@ -318,7 +320,7 @@
 
 
 
-<h1 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h1><h2 id="解压安装包-2"><a href="#解压安装包-2" class="headerlink" title="解压安装包"></a>解压安装包</h2><p><code>cd /home/app/software</code></p>
+<h1 id="部署MySQL"><a href="#部署MySQL" class="headerlink" title="部署MySQL"></a>部署MySQL</h1><h2 id="解压安装包-2"><a href="#解压安装包-2" class="headerlink" title="解压安装包"></a>解压安装包</h2><p><code>cd /home/app/software</code></p>
 <p><code>mkdir -p /opt/mysql</code></p>
 <p><code>tar -zxf mysql-5.7.23-1.el6.i686.rpm-bundle.tar -C /opt/mysql</code></p>
 <h2 id="安装各项依赖"><a href="#安装各项依赖" class="headerlink" title="安装各项依赖"></a>安装各项依赖</h2><p><code>cd /opt/mysql/</code></p>
@@ -326,7 +328,8 @@
 <p><code>rpm -ivh mysql-community-libs-5.7.25-1.el6.x86_64.rpm</code> </p>
 <p><code>rpm -ivh mysql-community-client-5.7.25-1.el6.x86_64.rpm</code></p>
 <p><code>rpm -ivh mysql-community-server-5.7.25-1.el6.x86_64.rpm --nodeps</code></p>
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p><code>service mysqld start</code></p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>授权：<code>chmod -R 777 /opt/mysql</code></p>
+<p><code>service mysqld start</code></p>
 <h2 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h2><h3 id="重置初始密码"><a href="#重置初始密码" class="headerlink" title="重置初始密码"></a>重置初始密码</h3><p><code>cat /var/log/mysqld.log | grep root@localhost</code></p>
 <img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/mysql-password.png" class="" title="mysql初始密码">
 
@@ -363,7 +366,63 @@
 <p><code>service mysqld start</code></p>
 </li>
 </ol>
-<h1 id="安装Hive"><a href="#安装Hive" class="headerlink" title="安装Hive"></a>安装Hive</h1>
+<h1 id="部署Hive"><a href="#部署Hive" class="headerlink" title="部署Hive"></a>部署Hive</h1><h2 id="解压安装包-3"><a href="#解压安装包-3" class="headerlink" title="解压安装包"></a>解压安装包</h2><p><code>cd /home/app/software</code></p>
+<p><code>mkdir -p /opt/hive</code></p>
+<p><code>tar -zxf apache-hive-1.2.2-bin.tar.gz -C /opt/hive</code></p>
+<h2 id="新建相关文件夹"><a href="#新建相关文件夹" class="headerlink" title="新建相关文件夹"></a>新建相关文件夹</h2><p><code>mkdir /opt/hive/hive-downloaded-addDir/</code> </p>
+<p><code>mkdir /opt/hive/hive-logging-operation-log-addDir</code></p>
+<p>目录结构如下：</p>
+<img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/hive-directory.png" class="" title="hive相关目录">
+
+<h2 id="配置环境变量-2"><a href="#配置环境变量-2" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p><code>vi /etc/profile</code></p>
+<p>加入HIVE_HOME配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> hive environment</span></span><br><span class="line">export HIVE_HOME=/opt/hive/apache-hive-1.2.2-bin</span><br><span class="line">export PATH=$PATH:$HIVE_HOME/bin</span><br><span class="line">export PATH USER LOGNAME MAIL HOSTNAME HISTSIZE HISTCONTROL</span><br></pre></td></tr></table></figure>
+
+<p>按ESC键，输入<code>:wq!</code>保存profile</p>
+<p><code>source /etc/profile</code></p>
+<h2 id="配置Hive文件"><a href="#配置Hive文件" class="headerlink" title="配置Hive文件"></a>配置Hive文件</h2><h3 id="修改hive-env-sh"><a href="#修改hive-env-sh" class="headerlink" title="修改hive-env.sh"></a>修改hive-env.sh</h3><p><code>cd /opt/hive/apache-hive-1.2.2-bin/conf</code> </p>
+<p><code>cp hive-env.sh.template hive-env.sh</code></p>
+<p><code>vi /opt/hive/apache-hive-1.2.2-bin/conf/hive-env.sh</code></p>
+<p>加入如下内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/opt/jdk1.7.0_80</span><br><span class="line">export HIVE_HOME=/opt/hive/apache-hive-1.2.2-bin</span><br><span class="line">export HADOOP_HOME=/opt/hadoop-2.7.7</span><br><span class="line">export HIVE_CONF_DIR=/opt/hive/apache-hive-1.2.2-bin/conf</span><br></pre></td></tr></table></figure>
+
+<p>按ESC键，输入<code>:wq!</code>保存文件</p>
+<h3 id="修改hive-site-xml"><a href="#修改hive-site-xml" class="headerlink" title="修改hive-site.xml"></a>修改hive-site.xml</h3><p><code>cd /opt/hive/apache-hive-1.2.2-bin/conf</code> </p>
+<p><code>cp hive-default.xml.template hive-site.xml</code></p>
+<p><code>vi /opt/hive/apache-hive-1.2.2-bin/conf/hive-site.xml</code></p>
+<p>加入一下内容，</p>
+<p><strong>注意：先删除原来javax.jdo.option.ConnectionUserName，javax.jdo.option.ConnectionPassword，javax.jdo.option.ConnectionURL，javax.jdo.option.ConnectionDriverName的配置</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionUserName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>root<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionPassword<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>Root@123<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionURL<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>jdbc:mysql://127.0.0.1:3306/hive?createDatabaseIfNotExist=true<span class="symbol">&amp;amp;</span>useUnicode=true<span class="symbol">&amp;amp;</span>characterEncoding=UTF-8<span class="symbol">&amp;amp;</span>useSSL=false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionDriverName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="新建hive-log4j-properties"><a href="#新建hive-log4j-properties" class="headerlink" title="新建hive-log4j.properties"></a>新建hive-log4j.properties</h3><p><code>cp hive-log4j.properties.template hive-log4j.properties</code> </p>
+<h3 id="新建hive-exec-log4j-properties"><a href="#新建hive-exec-log4j-properties" class="headerlink" title="新建hive-exec-log4j.properties"></a>新建hive-exec-log4j.properties</h3><p><code>cp hive-exec-log4j.properties.template hive-exec-log4j.properties</code></p>
+<h2 id="复制MySQL驱动"><a href="#复制MySQL驱动" class="headerlink" title="复制MySQL驱动"></a>复制MySQL驱动</h2><p><code>cp /home/app/software/mysql-connector-java-5.1.6.jar /opt/hive/apache-hive-1.2.2-bin/lib/</code></p>
+<h2 id="授权-1"><a href="#授权-1" class="headerlink" title="授权"></a>授权</h2><p><code>chmod -R 777 /opt/hive</code></p>
+<h2 id="初始化Hive-Schema"><a href="#初始化Hive-Schema" class="headerlink" title="初始化Hive Schema"></a>初始化Hive Schema</h2><p><code>cd /opt/hive/apache-hive-1.2.2-bin/bin</code> </p>
+<p><code>schematool -dbType mysql -initSchema</code></p>
+<h2 id="启动-1"><a href="#启动-1" class="headerlink" title="启动"></a>启动</h2><p><code>hive</code></p>
+<p>正常如下图，</p>
+<img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/hive-start.png" class="" title="hive启动">
+
+<h3 id="测试安装是否成功"><a href="#测试安装是否成功" class="headerlink" title="测试安装是否成功"></a>测试安装是否成功</h3><p><code>show databases;</code></p>
+<img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/hive-database.png" class="" title="hive数据库">
+
+<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><p><code>create table student_score</code></p>
+<p><code>(id int,name string,Chinese float,Math float,English float)</code> </p>
+<p><code>ROW FORMAT DELIMITED</code></p>
+<p><code>FIELDS TERMINATED BY &#39;\t&#39;</code></p>
+<p> <code>STORED AS TEXTFILE;</code></p>
+<h3 id="加载数据"><a href="#加载数据" class="headerlink" title="加载数据"></a>加载数据</h3><p><code>load data inpath &#39;/score.txt&#39; into table student_score;</code></p>
+<p><code>select * from student_score;</code></p>
+<img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/hive-select.png" class="" title="hive查询">
+
+<h2 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h2><h3 id="URISyntaxException"><a href="#URISyntaxException" class="headerlink" title="URISyntaxException"></a>URISyntaxException</h3><p>错误：java.net.URISyntaxException: Relative path in absolute URI: ${system:java.io.tmpdir…..</p>
+<p>参见资料：<a href="https://blog.csdn.net/qq_37076742/article/details/83547956" title="[external] [mysql启动报错参考资料]" target="">启动常见报错</a></p>
+<p>解决方案：</p>
+<p>在hive-site.xml加入</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>system:java.io.tmpdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/tmp/hive/java<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>system:user.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>$&#123;user.name&#125;<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
       
     </div>
 
