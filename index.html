@@ -455,7 +455,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-07 13:45:29" itemprop="dateModified" datetime="2020-05-07T13:45:29+08:00">2020-05-07</time>
+                <time title="Modified: 2020-05-08 13:26:15" itemprop="dateModified" datetime="2020-05-08T13:26:15+08:00">2020-05-08</time>
               </span>
 
           
@@ -593,8 +593,8 @@
 <h3 id="浏览器访问"><a href="#浏览器访问" class="headerlink" title="浏览器访问"></a>浏览器访问</h3><p>访问 <a href="http://masterIp:50070/dfshealth.html#tab-datanode，正常如下图，" target="_blank" rel="noopener">http://masterIp:50070/dfshealth.html#tab-datanode，正常如下图，</a></p>
 <img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/hadoop-web.png" class="" title="hadoop web页面访问">
 
-<h3 id="上传文件到hadoop"><a href="#上传文件到hadoop" class="headerlink" title="上传文件到hadoop"></a>上传文件到hadoop</h3><p>上传文件：<code>hadoop fs -put /root/score.txt /score.txt</code></p>
-<p>查看文件：<code>hadoop fs -cat /score.txt</code></p>
+<h3 id="上传文件到hadoop"><a href="#上传文件到hadoop" class="headerlink" title="上传文件到hadoop"></a>上传文件到hadoop</h3><p>上传文件：<code>hadoop fs -put /root/student_score.txt /student_score.txt</code></p>
+<p>查看文件：<code>hadoop fs -cat /student_score.txt</code></p>
 <img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/hadoop-upload.png" class="" title="hadoop文件上传">
 
 
@@ -686,40 +686,43 @@
 <h3 id="测试安装是否成功"><a href="#测试安装是否成功" class="headerlink" title="测试安装是否成功"></a>测试安装是否成功</h3><p><code>show databases;</code></p>
 <img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/hive-database.png" class="" title="hive数据库">
 
-<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><p><code>create table student_score</code></p>
-<p><code>(id int,name string,Chinese float,Math float,English float)</code> </p>
-<p><code>ROW FORMAT DELIMITED</code></p>
-<p><code>FIELDS TERMINATED BY &#39;\t&#39;</code></p>
-<p> <code>STORED AS TEXTFILE;</code></p>
-<h3 id="加载数据"><a href="#加载数据" class="headerlink" title="加载数据"></a>加载数据</h3><p><code>load data inpath &#39;/score.txt&#39; into table student_score;</code></p>
-<p><code>select * from student_score;</code></p>
-<img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/hive-select.png" class="" title="hive查询">
-
 <h2 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h2><h3 id="URISyntaxException"><a href="#URISyntaxException" class="headerlink" title="URISyntaxException"></a>URISyntaxException</h3><p>错误：java.net.URISyntaxException: Relative path in absolute URI: ${system:java.io.tmpdir…..</p>
 <p>参见资料：<a href="https://blog.csdn.net/qq_37076742/article/details/83547956" title="[external] [mysql启动报错参考资料]" target="">启动常见报错</a></p>
 <p>解决方案：</p>
 <p>在hive-site.xml加入</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>system:java.io.tmpdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/tmp/hive/java<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>system:user.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>$&#123;user.name&#125;<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="配置Hive客户端"><a href="#配置Hive客户端" class="headerlink" title="配置Hive客户端"></a>配置Hive客户端</h2><h3 id="修改core-xml"><a href="#修改core-xml" class="headerlink" title="修改core.xml"></a>修改core.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>     </span><br><span class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.proxyuser.root.hosts<span class="tag">&lt;/<span class="name">name</span>&gt;</span>     </span><br><span class="line">	<span class="tag">&lt;<span class="name">value</span>&gt;</span>*<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">property</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>     </span><br><span class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.proxyuser.root.groups<span class="tag">&lt;/<span class="name">name</span>&gt;</span>    </span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>*<span class="tag">&lt;/<span class="name">value</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="配置Hive客户端"><a href="#配置Hive客户端" class="headerlink" title="配置Hive客户端"></a>配置Hive客户端</h1><h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><h3 id="hadoop的core-xml"><a href="#hadoop的core-xml" class="headerlink" title="hadoop的core.xml"></a>hadoop的core.xml</h3><p><code>vi /opt/hadoop-2.7.7/etc/hadoop/core-site.xml</code></p>
+<p>加入以下内容：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>     </span><br><span class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.proxyuser.root.hosts<span class="tag">&lt;/<span class="name">name</span>&gt;</span>     </span><br><span class="line">	<span class="tag">&lt;<span class="name">value</span>&gt;</span>*<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">property</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>     </span><br><span class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.proxyuser.root.groups<span class="tag">&lt;/<span class="name">name</span>&gt;</span>    </span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>*<span class="tag">&lt;/<span class="name">value</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="修改hive-site-xml-1"><a href="#修改hive-site-xml-1" class="headerlink" title="修改hive-site.xml"></a>修改hive-site.xml</h3><p><code>vi /opt/hive/apache-hive-1.2.2-bin/conf/hive-site.xml</code></p>
+<h3 id="hive的hive-site-xml"><a href="#hive的hive-site-xml" class="headerlink" title="hive的hive-site.xml"></a>hive的hive-site.xml</h3><p><code>vi /opt/hive/apache-hive-1.2.2-bin/conf/hive-site.xml</code></p>
 <p>修改内容：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.server2.thrift.bind.host<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>192.168.169.134<span class="tag">&lt;/<span class="name">value</span>&gt;</span> <span class="comment">&lt;!-- 根据实际情况配置hive服务的ip地址 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Bind host on which to run the HiveServer2 Thrift service.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.server2.authentication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>NONE<span class="tag">&lt;/<span class="name">value</span>&gt;</span><span class="comment">&lt;!-- 配置成NONE --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">      Expects one of [nosasl, none, ldap, kerberos, pam, custom].</span><br><span class="line">      Client authentication types.</span><br><span class="line">        NONE: no authentication check</span><br><span class="line">        LDAP: LDAP/AD based authentication</span><br><span class="line">        KERBEROS: Kerberos/GSSAPI authentication</span><br><span class="line">        CUSTOM: Custom authentication provider</span><br><span class="line">                (Use with property hive.server2.custom.authentication.class)</span><br><span class="line">        PAM: Pluggable authentication module</span><br><span class="line">        NOSASL:  Raw transport</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="启动hiveserver2"><a href="#启动hiveserver2" class="headerlink" title="启动hiveserver2"></a>启动hiveserver2</h3><p><code>cd /opt/hive/apache-hive-1.2.2-bin/bin/</code></p>
+<p>启动hiveserver2</p>
+<p><code>cd /opt/hive/apache-hive-1.2.2-bin/bin/</code></p>
 <p><code>./hiveserver2</code></p>
-<p><img src="E:%5Cgit%5Cblog%5Csource_posts%5CLinux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%5Chiveserver2.png" alt="image-20200506131238092"></p>
-<h3 id="启动beeline"><a href="#启动beeline" class="headerlink" title="启动beeline"></a>启动beeline</h3><p><code>beeline</code></p>
-<p><img src="E:%5Cgit%5Cblog%5Csource_posts%5CLinux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%5Cimage-20200506131911865.png" alt="image-20200506131911865"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!exit</span><br></pre></td></tr></table></figure>
+<img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/hiveserver2.png" class="" title="启动hiveserver2">
 
-<p><img src="E:%5Cgit%5Cblog%5Csource_posts%5CLinux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%5Chive-createtable.png" alt="image-20200507123316163"></p>
-<p><img src="E:%5Cgit%5Cblog%5Csource_posts%5CLinux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%5Chive-createtable2.png" alt="image-20200507123423998"></p>
-<p><img src="E:%5Cgit%5Cblog%5Csource_posts%5CLinux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%5Chive-load-select.png" alt="image-20200507124248310"></p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="启动beeline"><a href="#启动beeline" class="headerlink" title="启动beeline"></a>启动beeline</h3><p><code>beeline</code></p>
+<img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/image-20200506131911865.png" class="" title="启动beeline">
 
+<h3 id="连接hiveserver2创建表"><a href="#连接hiveserver2创建表" class="headerlink" title="连接hiveserver2创建表"></a>连接hiveserver2创建表</h3><p><code>!connet jdbc:hive2://192.168.169.134:10000</code></p>
+<p><code>create table student_score</code><br><code>(id int,name string,subject string,score float)</code><br><code>ROW FORMAT DELIMITED</code><br><code>FIELDS TERMINATED BY &#39;\t&#39;</code><br><code>STORED AS TEXTFILE;</code></p>
+<img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/hive-createtable2.png" class="" title="连接hiveserver2创建表">
+
+<h3 id="加载数据并查询"><a href="#加载数据并查询" class="headerlink" title="加载数据并查询"></a>加载数据并查询</h3><p><code>load data inpath &#39;/student_score.txt&#39; into table student_score;</code></p>
+<p><code>select * from student_score;</code></p>
+<img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/hive-load-select.png" class="" title="加载数据">
+
+<h3 id="退出beeline"><a href="#退出beeline" class="headerlink" title="退出beeline"></a>退出beeline</h3><p><code>!exit</code></p>
+<h2 id="错误解决"><a href="#错误解决" class="headerlink" title="错误解决"></a>错误解决</h2><h3 id="执行sum-count-等函数，没有反应？一直停留以下界面"><a href="#执行sum-count-等函数，没有反应？一直停留以下界面" class="headerlink" title="执行sum(),count()等函数，没有反应？一直停留以下界面"></a>执行sum(),count()等函数，没有反应？一直停留以下界面</h3><img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/hive-sum.png" class="" title="执行统计函数没有反应">
+
+<p>考虑硬件资源问题，后面把硬件配置调整如下图，问题解决</p>
+<img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/hive-sum2.png" class="" title="硬件配置参考">
       
     </div>
 
