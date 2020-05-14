@@ -28,8 +28,9 @@
 <meta property="og:description" content="环境准备CentOS Linux release 7.6.1810 (Core) Linux master 3.10.0-957.el7.x86_64 #1 SMP Thu Nov 8 23:39:32 UTC 2018 x86_64 x86_64 x86_64 GNU&#x2F;Linux 安装Docker参见资料：centos7安装docker 123456789101112131415161718#使">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/2020/05/14/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/14/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker-2.png">
 <meta property="article:published_time" content="2020-05-14T11:02:37.000Z">
-<meta property="article:modified_time" content="2020-05-14T11:18:23.389Z">
+<meta property="article:modified_time" content="2020-05-14T11:59:46.392Z">
 <meta property="article:author" content="Abby Zhyd">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2020/05/14/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker-1.png">
@@ -176,7 +177,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-05-14 19:02:37 / Modified: 19:18:23" itemprop="dateCreated datePublished" datetime="2020-05-14T19:02:37+08:00">2020-05-14</time>
+              <time title="Created: 2020-05-14 19:02:37 / Modified: 19:59:46" itemprop="dateCreated datePublished" datetime="2020-05-14T19:02:37+08:00">2020-05-14</time>
             </span>
 
           
@@ -199,8 +200,42 @@
 
 <center>图1.docker安装成功</center>
 
+<h1 id="Docker基本命令"><a href="#Docker基本命令" class="headerlink" title="Docker基本命令"></a>Docker基本命令</h1><p>参见资料：<a href="https://www.runoob.com/docker/docker-container-usage.html" title="[external] [docker基本命令]" target="">docker基本命令</a></p>
+<h2 id="获取镜像"><a href="#获取镜像" class="headerlink" title="获取镜像"></a>获取镜像</h2><p><code>docker pull &lt;镜像名称&gt;</code></p>
+<p>例：<code>docker pull hello-world</code></p>
+<h2 id="镜像库查找镜像"><a href="#镜像库查找镜像" class="headerlink" title="镜像库查找镜像"></a>镜像库查找镜像</h2><p><code>docker search &lt;镜像关键字&gt;</code></p>
+<p>例：<code>docker search mysql</code></p>
+<h2 id="查看镜像"><a href="#查看镜像" class="headerlink" title="查看镜像"></a>查看镜像</h2><p><code>docker images</code></p>
+<h2 id="删除镜像"><a href="#删除镜像" class="headerlink" title="删除镜像"></a>删除镜像</h2><p><code>docker rmi &lt;镜像Id&gt;</code></p>
+<h2 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h2><h3 id="启动后进入命令行模式"><a href="#启动后进入命令行模式" class="headerlink" title="启动后进入命令行模式"></a>启动后进入命令行模式</h3><p><code>docker run -it &lt;镜像名称&gt;[:&lt;标签&gt;] /bin/bash</code></p>
+<p>例：<code>docker run it centos:7.8.25 /bin/bash</code></p>
+<h3 id="后台启动"><a href="#后台启动" class="headerlink" title="后台启动"></a>后台启动</h3><p><code>docker run -itd --name &lt;容器名称&gt; &lt;镜像名称&gt;[:标签] /bin/bash</code></p>
+<h3 id="端口映射"><a href="#端口映射" class="headerlink" title="端口映射"></a>端口映射</h3><p><code>docker run -itd --name &lt;容器名称&gt; -p &lt;宿主机端口&gt;:&lt;容器端口&gt; &lt;镜像名称&gt;[:标签] /usr/sbin/init</code></p>
+<h3 id="开启root权限"><a href="#开启root权限" class="headerlink" title="开启root权限"></a>开启root权限</h3><p><code>docker run -itd --name &lt;容器名称&gt; --privileged=true &lt;镜像名称&gt;[:标签] /usr/sbin/init</code></p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p><code>docker run -itd --name centos-mysql --privileged=true -p 2222:22 -p 3308:3306 centos:mysql-sshd2 /usr/sbin/init</code></p>
+<h2 id="查看容器"><a href="#查看容器" class="headerlink" title="查看容器"></a>查看容器</h2><p><code>docker ps -a</code></p>
+<h2 id="启动-关闭-重启容器"><a href="#启动-关闭-重启容器" class="headerlink" title="启动/关闭/重启容器"></a>启动/关闭/重启容器</h2><p><code>docker start &lt;容器Id&gt;</code></p>
+<p><code>docker stop &lt;容器Id&gt;</code></p>
+<p><code>docker restart &lt;容器Id&gt;</code></p>
+<h2 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h2><p>推荐：<code>docker exec -it &lt;容器名称/容器Id&gt; /bin/bash</code>，退出容器，容器不会关闭</p>
+<p><code>docker attach &lt;容器名称/容器Id&gt;</code>，退出容器，容器自动关闭</p>
+<h2 id="退出容器"><a href="#退出容器" class="headerlink" title="退出容器"></a>退出容器</h2><p><code>exit</code></p>
+<h2 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h2><p><code>docker rm -f &lt;容器Id&gt;</code></p>
+<h2 id="容器导成镜像"><a href="#容器导成镜像" class="headerlink" title="容器导成镜像"></a>容器导成镜像</h2><p><code>docker commit &lt;容器ID&gt; &lt;镜像名称/标签&gt;</code></p>
+<h2 id="Dockerfile制作镜像"><a href="#Dockerfile制作镜像" class="headerlink" title="Dockerfile制作镜像"></a>Dockerfile制作镜像</h2><p><code>vi Dockerfile</code></p>
+<p><code>docker build -t &lt;镜像名称&gt;[:标签] .</code></p>
+<h1 id="制作sshd镜像"><a href="#制作sshd镜像" class="headerlink" title="制作sshd镜像"></a>制作sshd镜像</h1><p>参见资料：<a href="https://blog.csdn.net/tengdazhang770960436/article/details/85009049" title="[external] [制作sshd镜像]" target="">制作sshd镜像</a></p>
+<p>通过<code>docker pull centos:7</code> 准备好一个基本镜像</p>
+<img src="/2020/05/14/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker-2.png" class="" title="centos7镜像">
 
+<center>图2.centos7镜像</center>
 
+<p><code>vi Dockerfile</code></p>
+<p>内容如下：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> centos:centos7</span><br><span class="line"><span class="comment"># 1.准备工作创建文件夹</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> \</span></span><br><span class="line"><span class="bash">    mkdir -p /opt/tools</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 sshd 修改root密码为123456</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> \</span></span><br><span class="line"><span class="bash">    yum install passwd openssl openssh-server -y \</span></span><br><span class="line"><span class="bash">    &amp;&amp; ssh-keygen -q -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N <span class="string">''</span> \</span></span><br><span class="line"><span class="bash">    &amp;&amp; ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N <span class="string">''</span> \</span></span><br><span class="line"><span class="bash">    &amp;&amp; ssh-keygen -t dsa -f /etc/ssh/ssh_host_ed25519_key  -N <span class="string">''</span> \</span></span><br><span class="line"><span class="bash">    &amp;&amp; sed -i <span class="string">"s/#UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g"</span> /etc/ssh/sshd_config \</span></span><br><span class="line"><span class="bash">    &amp;&amp; sed -i <span class="string">"s/UsePAM.*/UsePAM no/g"</span> /etc/ssh/sshd_config \</span></span><br><span class="line"><span class="bash">    &amp;&amp; <span class="built_in">echo</span> 123456 | passwd --stdin root \</span></span><br><span class="line"><span class="bash">    &amp;&amp; <span class="built_in">echo</span> root:123456|chpasswd \</span></span><br><span class="line"><span class="bash">    &amp;&amp; rm -rf /var/cache/yum/*</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">22</span> <span class="number">80</span></span><br><span class="line"><span class="comment"># 启动sshd服务</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">"/usr/sbin/sshd"</span>, <span class="string">"-D"</span>]</span></span><br></pre></td></tr></table></figure>
+
+<p>保存Dockerfile</p>
+<p><code>docker build -t centos:sshd .</code></p>
 
     </div>
 
@@ -278,7 +313,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#环境准备"><span class="nav-number">1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Docker"><span class="nav-number">2.</span> <span class="nav-text">安装Docker</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#环境准备"><span class="nav-number">1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Docker"><span class="nav-number">2.</span> <span class="nav-text">安装Docker</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker基本命令"><span class="nav-number">3.</span> <span class="nav-text">Docker基本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取镜像"><span class="nav-number">3.1.</span> <span class="nav-text">获取镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#镜像库查找镜像"><span class="nav-number">3.2.</span> <span class="nav-text">镜像库查找镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看镜像"><span class="nav-number">3.3.</span> <span class="nav-text">查看镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除镜像"><span class="nav-number">3.4.</span> <span class="nav-text">删除镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动容器"><span class="nav-number">3.5.</span> <span class="nav-text">启动容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动后进入命令行模式"><span class="nav-number">3.5.1.</span> <span class="nav-text">启动后进入命令行模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后台启动"><span class="nav-number">3.5.2.</span> <span class="nav-text">后台启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#端口映射"><span class="nav-number">3.5.3.</span> <span class="nav-text">端口映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启root权限"><span class="nav-number">3.5.4.</span> <span class="nav-text">开启root权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">3.5.5.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看容器"><span class="nav-number">3.6.</span> <span class="nav-text">查看容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动-关闭-重启容器"><span class="nav-number">3.7.</span> <span class="nav-text">启动&#x2F;关闭&#x2F;重启容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进入容器"><span class="nav-number">3.8.</span> <span class="nav-text">进入容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#退出容器"><span class="nav-number">3.9.</span> <span class="nav-text">退出容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除容器"><span class="nav-number">3.10.</span> <span class="nav-text">删除容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器导成镜像"><span class="nav-number">3.11.</span> <span class="nav-text">容器导成镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dockerfile制作镜像"><span class="nav-number">3.12.</span> <span class="nav-text">Dockerfile制作镜像</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#制作sshd镜像"><span class="nav-number">4.</span> <span class="nav-text">制作sshd镜像</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
