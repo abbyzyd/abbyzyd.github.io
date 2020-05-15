@@ -168,10 +168,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-05-14 19:02:37 / Modified: 19:59:46" itemprop="dateCreated datePublished" datetime="2020-05-14T19:02:37+08:00">2020-05-14</time>
+              <time title="Created: 2020-05-14 19:02:37" itemprop="dateCreated datePublished" datetime="2020-05-14T19:02:37+08:00">2020-05-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-15 16:47:51" itemprop="dateModified" datetime="2020-05-15T16:47:51+08:00">2020-05-15</time>
+              </span>
 
           
 
@@ -214,9 +220,19 @@
 <p><code>docker attach &lt;容器名称/容器Id&gt;</code>，退出容器，容器自动关闭</p>
 <h2 id="退出容器"><a href="#退出容器" class="headerlink" title="退出容器"></a>退出容器</h2><p><code>exit</code></p>
 <h2 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h2><p><code>docker rm -f &lt;容器Id&gt;</code></p>
-<h2 id="容器导成镜像"><a href="#容器导成镜像" class="headerlink" title="容器导成镜像"></a>容器导成镜像</h2><p><code>docker commit &lt;容器ID&gt; &lt;镜像名称/标签&gt;</code></p>
+<h2 id="打包容器导成镜像"><a href="#打包容器导成镜像" class="headerlink" title="打包容器导成镜像"></a>打包容器导成镜像</h2><p><code>docker commit &lt;容器ID&gt; &lt;镜像名称/标签&gt;</code></p>
 <h2 id="Dockerfile制作镜像"><a href="#Dockerfile制作镜像" class="headerlink" title="Dockerfile制作镜像"></a>Dockerfile制作镜像</h2><p><code>vi Dockerfile</code></p>
 <p><code>docker build -t &lt;镜像名称&gt;[:标签] .</code></p>
+<h2 id="修改镜像源"><a href="#修改镜像源" class="headerlink" title="修改镜像源"></a>修改镜像源</h2><p><code>vi /etc/docker/daemon.json</code></p>
+<p>加入以下内容：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"registry-mirrors"</span>: [<span class="string">"https://registry.docker-cn.com"</span>,<span class="string">"https://docker.mirrors.ustc.edu.cn"</span>,<span class="string">"https://hub-mirror.c.163.com"</span>],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>修改完后需要重启守护进程和docker服务</p>
+<p><code>sudo systemctl daemon-reload</code></p>
+<p><code>systemctl restart docker</code></p>
+<h2 id="导出镜像"><a href="#导出镜像" class="headerlink" title="导出镜像"></a>导出镜像</h2><p><code>docker save -o &lt;目标tar文件&gt; &lt;镜像名称&gt;:&lt;版本&gt;</code></p>
+<p><code>docker save -o /home/zhyd/centos7.tar centos:7</code></p>
+<h2 id="导入镜像"><a href="#导入镜像" class="headerlink" title="导入镜像"></a>导入镜像</h2><p><code>docker import &lt;tar文件&gt; &lt;目标镜像名称&gt;:&lt;目标版本&gt;</code></p>
 <h1 id="制作sshd镜像"><a href="#制作sshd镜像" class="headerlink" title="制作sshd镜像"></a>制作sshd镜像</h1><p>参见资料：<a href="https://blog.csdn.net/tengdazhang770960436/article/details/85009049" title="[external] [制作sshd镜像]" target="">制作sshd镜像</a></p>
 <p>通过<code>docker pull centos:7</code> 准备好一个基本镜像</p>
 <img src="/2020/05/14/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker-2.png" class="" title="centos7镜像">
@@ -229,6 +245,67 @@
 
 <p>保存Dockerfile</p>
 <p><code>docker build -t centos:sshd .</code></p>
+<p>启动镜像</p>
+<p><code>docker run -i -d --name centos-sshd -p 1022:22 centos:sshd</code></p>
+<h1 id="制作mysql镜像"><a href="#制作mysql镜像" class="headerlink" title="制作mysql镜像"></a>制作mysql镜像</h1><p><code>docker start 10a1fd7a167d</code></p>
+<img src="/2020/05/14/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker-3.png" class="" title="启动sshd镜像容器">
+
+<center>图3. 启动sshd镜像容器</center>
+
+<p>进入容器</p>
+<p><code>docker exec -it 10a1fd7a167d /bin/bash</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">容器是精简版，没有wget软件包，需要yum安装wget</span></span><br><span class="line">yum install wget</span><br><span class="line"><span class="meta">#</span><span class="bash">下载并安装MySQL官方的 Yum Repository</span></span><br><span class="line">wget -i -c http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm</span><br><span class="line">yum -y install mysql57-community-release-el7-10.noarch.rpm</span><br><span class="line">yum -y install mysql-community-server</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，重启容器，重新进入容器</p>
+<p>启动mysql：<code>systemctl start mysqld</code></p>
+<p>按ctrl+c，重新出现命令行</p>
+<p>查看mysql进程：<code>ps -ef|grep mysql</code></p>
+<p>查看mysql初始密码：<code>cat /var/log/mysqld.log | grep root@localhost</code></p>
+<p>进入mysql：<code>mysql -u root -p</code></p>
+<p>重新密码：<code>set password=password(&#39;Root@123&#39;);</code></p>
+<p>授权root：<code>grant all privileges on *.* to &#39;root&#39;@&#39;%&#39; identified by &#39;Root@123&#39;;</code></p>
+<p>退出mysql：<code>systemctl stop mysqld</code></p>
+<p>退出容器：<code>exit</code></p>
+<p>关闭容器：<code>docker stop 10a1fd7a167d</code></p>
+<p>打包容器为镜像：<code>docker commit 10a1fd7a167d centos:mysql</code></p>
+<h1 id="制作MySQL5-7-Hadoop2-7-7-Hive1-2-2镜像"><a href="#制作MySQL5-7-Hadoop2-7-7-Hive1-2-2镜像" class="headerlink" title="制作MySQL5.7+Hadoop2.7.7+Hive1.2.2镜像"></a>制作MySQL5.7+Hadoop2.7.7+Hive1.2.2镜像</h1><h2 id="制作基本镜像"><a href="#制作基本镜像" class="headerlink" title="制作基本镜像"></a>制作基本镜像</h2><p>编写Dockerfile：<code>vi Dockerfile</code></p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用上一步部署了MySQL的镜像，如图4</span></span><br><span class="line"><span class="keyword">FROM</span> da8cd0dc157d</span><br><span class="line"><span class="keyword">MAINTAINER</span> zhyd</span><br><span class="line"><span class="keyword">ENV</span> REFRESHED_AT <span class="number">2020</span>-<span class="number">05</span>-<span class="number">14</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">#切换镜像目录，进入/opt目录</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /opt</span></span><br><span class="line"><span class="comment">#在/opt/下创建jdk目录,用来存放jdk文件</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> mkdir -p jdk1.7.0_80</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> mkdir -p hadoop-2.7.7</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> mkdir -p hive</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#目录设计最好跟宿主机保持一致，方便配置</span></span><br><span class="line"><span class="comment">#将宿主机的jdk1.7.0_80目录下的文件拷至镜像的/opt/jdk1.7.0_80目录下</span></span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> jdk1.7.0_80 /opt/jdk1.7.0_80/</span></span><br><span class="line"><span class="comment">#将宿主机的hadoop-2.7.7目录下的文件拷至镜像的/opt/hadoop-2.7.7目录下</span></span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> hadoop-2.7.7 /opt/hadoop-2.7.7/</span></span><br><span class="line"><span class="comment">#将宿主机的hive目录下的文件拷至镜像的/opt/hive目录下</span></span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> hive /opt/hive</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#设置环境变量，好像没有起效，后面直接在容器里面添加</span></span><br><span class="line"><span class="keyword">ENV</span> JAVA_HOME=/opt/jdk1.<span class="number">7.0</span>_80</span><br><span class="line"><span class="keyword">ENV</span> JRE_HOME=$JAVA_HOME/jre</span><br><span class="line"><span class="keyword">ENV</span> CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib:$CLASSPATH</span><br><span class="line"><span class="keyword">ENV</span> PATH=/sbin:$JAVA_HOME/bin:$PATH</span><br><span class="line"></span><br><span class="line"><span class="comment">#ENV HADOOP_HOME=/opt/hadoop-2.7.7</span></span><br><span class="line"><span class="comment">#ENV PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#ENV HIVE_HOME=/opt/hive/apache-hive-1.2.2-bin</span></span><br><span class="line"><span class="comment">#ENV PATH=$PATH:$HIVE_HOME/bin</span></span><br><span class="line"><span class="comment">#export PATH USER LOGNAME MAIL HOSTNAME HISTSIZE HISTCONTROL</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#公开端口</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">22</span> <span class="number">80</span> <span class="number">8088</span> <span class="number">3306</span> <span class="number">10000</span> <span class="number">10002</span>  <span class="number">50070</span></span><br><span class="line"><span class="comment">#设置启动命令</span></span><br><span class="line"><span class="comment">#ENTRYPOINT ["/usr/tomcat/bin/catalina.sh","run"]</span></span><br><span class="line"><span class="comment"># 启动sshd服务</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">"/usr/sbin/sshd"</span>, <span class="string">"-D"</span>]</span></span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/14/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker-4.png" class="" title="部署了MySQL的镜像">
+
+<center>图4. 部署了MySQL的镜像</center>
+
+<p><strong>注意：Dockerfile 和主机的Hadoop目录，Hive目录是放在同一个目录下面，如图5，都在主机的opt目录下面，</strong></p>
+<img src="/2020/05/14/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker-5.png" class="" title="Dockerfile 和主机的Hadoop目录，Hive目录在同一个目录下面">
+
+<center>图5. 注意：Dockerfile的所在目录 </center>
+
+<p>制作镜像：<code>docker build -t centos:mysql-hadoop-hive .</code></p>
+<h2 id="生成容器"><a href="#生成容器" class="headerlink" title="生成容器"></a>生成容器</h2><p><code>docker run -itd --name centos-mysql-hadoop-hive --privileged=true -p 2222:22 -p 3308:3306 -p 10100:10000 -p 8188:8088 -p 50170:50070 -p 10102:10002 --hostname master centos:mysql-hadoop-hive /usr/sbin/init</code></p>
+<p><strong>注意：需要指定hostname为master，<code>--hostname master</code></strong></p>
+<h2 id="搭建容器"><a href="#搭建容器" class="headerlink" title="搭建容器"></a>搭建容器</h2><h3 id="进入容器-1"><a href="#进入容器-1" class="headerlink" title="进入容器"></a>进入容器</h3><p>该容器启动了sshd服务，可用xshell等工具连接（注意端口号），也可以使用命令进入</p>
+<p><code>docker exec -it centos-mysql-hadoop-hive /bin/bash</code></p>
+<h3 id="修改环境变量"><a href="#修改环境变量" class="headerlink" title="修改环境变量"></a>修改环境变量</h3><p>参照主机</p>
+<p><code>vi /etc/profile</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=/opt/jdk1.7.0_80</span><br><span class="line">JRE_HOME=/opt/jdk1.7.0_80/jre</span><br><span class="line">CLASS_PATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib</span><br><span class="line">PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin</span><br><span class="line">export JAVA_HOME JRE_HOME CLASS_PATH PATH</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> hadoop environment</span></span><br><span class="line">export HADOOP_HOME=/opt/hadoop-2.7.7</span><br><span class="line">export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> hive environment</span></span><br><span class="line">export HIVE_HOME=/opt/hive/apache-hive-1.2.2-bin</span><br><span class="line">export PATH=$PATH:$HIVE_HOME/bin</span><br><span class="line">export PATH USER LOGNAME MAIL HOSTNAME HISTSIZE HISTCONTROL</span><br></pre></td></tr></table></figure>
+
+<p><code>source /etc/profile</code></p>
+<h3 id="安装which，openssh-clients，hadoop需要用到"><a href="#安装which，openssh-clients，hadoop需要用到" class="headerlink" title="安装which，openssh-clients，hadoop需要用到"></a>安装which，openssh-clients，hadoop需要用到</h3><p><code>yum install -y which</code></p>
+<p><code>yum install openssh-clients</code></p>
+<h3 id="格式化hadoop"><a href="#格式化hadoop" class="headerlink" title="格式化hadoop"></a>格式化hadoop</h3><p><code>rm -rf /opt/hadoop-2.7.7/data</code></p>
+<p><code>mkdir -p /opt/hadoop-2.7.7/data/tmp</code></p>
+<p><code>mkdir -p /opt/hadoop-2.7.7/data/var</code></p>
+<p><code>mkdir -p /opt/hadoop-2.7.7/data/dfs/nn</code></p>
+<p><code>mkdir -p /opt/hadoop-2.7.7/data/dfs/data</code></p>
+<p><code>chmod -R 777 /opt/hadoop-2.7.7</code></p>
+<p><code>hadoop namenode -format</code></p>
+<h3 id="启动MySQL"><a href="#启动MySQL" class="headerlink" title="启动MySQL"></a>启动MySQL</h3><p><code>systemctl start mysqld</code></p>
+<h3 id="修改hive-site-xml"><a href="#修改hive-site-xml" class="headerlink" title="修改hive-site.xml"></a>修改hive-site.xml</h3><p>修改hive-site的hive.server2.thrift.bind.host，改成容器的ip，容器ip通过<code>ip addr</code>去查</p>
+<p><code>vi /opt/hive/apache-hive-1.2.2-bin/conf/hive-site.xml</code></p>
+<h3 id="初始化Hive"><a href="#初始化Hive" class="headerlink" title="初始化Hive"></a>初始化Hive</h3><p><code>cd /opt/hive/apache-hive-1.2.2-bin/bin</code></p>
+<p><code>schematool -dbType mysql -initSchema</code></p>
+<h2 id="导出容器"><a href="#导出容器" class="headerlink" title="导出容器"></a>导出容器</h2><p>退出容器： <code>exit</code></p>
+<p>导成镜像：<code>docker commit ab6b7d70a23c centos:mysql5.7-hadoop2.7.7-hive1.2.2</code></p>
 
       
     </div>
@@ -558,7 +635,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-09 23:34:17" itemprop="dateModified" datetime="2020-05-09T23:34:17+08:00">2020-05-09</time>
+                <time title="Modified: 2020-05-15 15:15:41" itemprop="dateModified" datetime="2020-05-15T15:15:41+08:00">2020-05-15</time>
               </span>
 
           
@@ -815,7 +892,7 @@
 <h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="启动beeline"><a href="#启动beeline" class="headerlink" title="启动beeline"></a>启动beeline</h3><p><code>beeline</code></p>
 <img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/image-20200506131911865.png" class="" title="启动beeline">
 
-<h3 id="连接hiveserver2创建表"><a href="#连接hiveserver2创建表" class="headerlink" title="连接hiveserver2创建表"></a>连接hiveserver2创建表</h3><p><code>!connet jdbc:hive2://192.168.169.134:10000</code></p>
+<h3 id="连接hiveserver2创建表"><a href="#连接hiveserver2创建表" class="headerlink" title="连接hiveserver2创建表"></a>连接hiveserver2创建表</h3><p><code>!connect jdbc:hive2://192.168.169.134:10000</code></p>
 <p><code>create table student_score</code><br><code>(id int,name string,subject string,score float)</code><br><code>ROW FORMAT DELIMITED</code><br><code>FIELDS TERMINATED BY &#39;\t&#39;</code><br><code>STORED AS TEXTFILE;</code></p>
 <img src="/2020/05/03/Linux%E4%B8%8BHadoop-Mysql-Hive%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/hive-createtable2.png" class="" title="连接hiveserver2创建表">
 
