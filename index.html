@@ -176,7 +176,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-15 16:47:51" itemprop="dateModified" datetime="2020-05-15T16:47:51+08:00">2020-05-15</time>
+                <time title="Modified: 2020-05-15 20:03:33" itemprop="dateModified" datetime="2020-05-15T20:03:33+08:00">2020-05-15</time>
               </span>
 
           
@@ -232,7 +232,11 @@
 <p><code>systemctl restart docker</code></p>
 <h2 id="导出镜像"><a href="#导出镜像" class="headerlink" title="导出镜像"></a>导出镜像</h2><p><code>docker save -o &lt;目标tar文件&gt; &lt;镜像名称&gt;:&lt;版本&gt;</code></p>
 <p><code>docker save -o /home/zhyd/centos7.tar centos:7</code></p>
-<h2 id="导入镜像"><a href="#导入镜像" class="headerlink" title="导入镜像"></a>导入镜像</h2><p><code>docker import &lt;tar文件&gt; &lt;目标镜像名称&gt;:&lt;目标版本&gt;</code></p>
+<h2 id="导入镜像"><a href="#导入镜像" class="headerlink" title="导入镜像"></a>导入镜像</h2><p><code>docker import &lt;tar文件&gt; &lt;目标镜像名称&gt;:&lt;目标版本&gt;</code>这个命令有坑。。。导入后镜像启动不了</p>
+<p>建议使用：</p>
+<p><code>docker load -i &lt;tar文件&gt;</code></p>
+<p><code>docker load -i centos7-mysql5.7-hadoop2.7.7-hive1.2.2.tar</code></p>
+<p><code>docker tage [镜像id] [新镜像名称]:[新镜像标签]</code> </p>
 <h1 id="制作sshd镜像"><a href="#制作sshd镜像" class="headerlink" title="制作sshd镜像"></a>制作sshd镜像</h1><p>参见资料：<a href="https://blog.csdn.net/tengdazhang770960436/article/details/85009049" title="[external] [制作sshd镜像]" target="">制作sshd镜像</a></p>
 <p>通过<code>docker pull centos:7</code> 准备好一个基本镜像</p>
 <img src="/2020/05/14/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker-2.png" class="" title="centos7镜像">
@@ -282,6 +286,7 @@
 
 <p>制作镜像：<code>docker build -t centos:mysql-hadoop-hive .</code></p>
 <h2 id="生成容器"><a href="#生成容器" class="headerlink" title="生成容器"></a>生成容器</h2><p><code>docker run -itd --name centos-mysql-hadoop-hive --privileged=true -p 2222:22 -p 3308:3306 -p 10100:10000 -p 8188:8088 -p 50170:50070 -p 10102:10002 --hostname master centos:mysql-hadoop-hive /usr/sbin/init</code></p>
+<p>docker run -itd –name centos-mysql-hadoop-hive –privileged=true -p 2222:22 -p 3308:3306 -p 10100:10000 -p 8188:8088 -p 50170:50070 -p 10102:10002 –hostname master centos7:mysql5.7-hadoop2.7.7-hive1.2.2 /usr/sbin/init</p>
 <p><strong>注意：需要指定hostname为master，<code>--hostname master</code></strong></p>
 <h2 id="搭建容器"><a href="#搭建容器" class="headerlink" title="搭建容器"></a>搭建容器</h2><h3 id="进入容器-1"><a href="#进入容器-1" class="headerlink" title="进入容器"></a>进入容器</h3><p>该容器启动了sshd服务，可用xshell等工具连接（注意端口号），也可以使用命令进入</p>
 <p><code>docker exec -it centos-mysql-hadoop-hive /bin/bash</code></p>
@@ -302,6 +307,7 @@
 <h3 id="启动MySQL"><a href="#启动MySQL" class="headerlink" title="启动MySQL"></a>启动MySQL</h3><p><code>systemctl start mysqld</code></p>
 <h3 id="修改hive-site-xml"><a href="#修改hive-site-xml" class="headerlink" title="修改hive-site.xml"></a>修改hive-site.xml</h3><p>修改hive-site的hive.server2.thrift.bind.host，改成容器的ip，容器ip通过<code>ip addr</code>去查</p>
 <p><code>vi /opt/hive/apache-hive-1.2.2-bin/conf/hive-site.xml</code></p>
+<p>172.17.0.2</p>
 <h3 id="初始化Hive"><a href="#初始化Hive" class="headerlink" title="初始化Hive"></a>初始化Hive</h3><p><code>cd /opt/hive/apache-hive-1.2.2-bin/bin</code></p>
 <p><code>schematool -dbType mysql -initSchema</code></p>
 <h2 id="导出容器"><a href="#导出容器" class="headerlink" title="导出容器"></a>导出容器</h2><p>退出容器： <code>exit</code></p>
