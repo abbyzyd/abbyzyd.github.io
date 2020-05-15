@@ -33,7 +33,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/05/14/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker-4.png">
 <meta property="og:image" content="http://yoursite.com/2020/05/14/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker-5.png">
 <meta property="article:published_time" content="2020-05-14T11:02:37.000Z">
-<meta property="article:modified_time" content="2020-05-15T12:03:33.895Z">
+<meta property="article:modified_time" content="2020-05-15T12:08:51.436Z">
 <meta property="article:author" content="Abby Zhyd">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2020/05/14/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/docker-1.png">
@@ -186,7 +186,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-15 20:03:33" itemprop="dateModified" datetime="2020-05-15T20:03:33+08:00">2020-05-15</time>
+                <time title="Modified: 2020-05-15 20:08:51" itemprop="dateModified" datetime="2020-05-15T20:08:51+08:00">2020-05-15</time>
               </span>
 
           
@@ -296,7 +296,6 @@
 
 <p>制作镜像：<code>docker build -t centos:mysql-hadoop-hive .</code></p>
 <h2 id="生成容器"><a href="#生成容器" class="headerlink" title="生成容器"></a>生成容器</h2><p><code>docker run -itd --name centos-mysql-hadoop-hive --privileged=true -p 2222:22 -p 3308:3306 -p 10100:10000 -p 8188:8088 -p 50170:50070 -p 10102:10002 --hostname master centos:mysql-hadoop-hive /usr/sbin/init</code></p>
-<p>docker run -itd –name centos-mysql-hadoop-hive –privileged=true -p 2222:22 -p 3308:3306 -p 10100:10000 -p 8188:8088 -p 50170:50070 -p 10102:10002 –hostname master centos7:mysql5.7-hadoop2.7.7-hive1.2.2 /usr/sbin/init</p>
 <p><strong>注意：需要指定hostname为master，<code>--hostname master</code></strong></p>
 <h2 id="搭建容器"><a href="#搭建容器" class="headerlink" title="搭建容器"></a>搭建容器</h2><h3 id="进入容器-1"><a href="#进入容器-1" class="headerlink" title="进入容器"></a>进入容器</h3><p>该容器启动了sshd服务，可用xshell等工具连接（注意端口号），也可以使用命令进入</p>
 <p><code>docker exec -it centos-mysql-hadoop-hive /bin/bash</code></p>
